@@ -1,3 +1,12 @@
+const numberBtns = document.querySelectorAll(".digits");
+const operatorBtns = document.querySelectorAll(".operators");
+const equalsBtn = document.getElementById("equals");
+const allClearBtn = document.getElementById("allclear");
+const clearBtn = document.getElementById("clear");
+const decimalBtn = document.getElementById("decimal");
+const userInput = document.getElementById("user-input");
+const resultScreen = document.getElementById("result");
+
 function add(a, b) {
   return a + b;
 }
@@ -14,19 +23,29 @@ function divide(a, b) {
   return a / b;
 }
 
+function remainder(a, b) {
+  return a % b;
+}
+
 function operate(operator, a, b) {
   switch (operator) {
     case "+":
-      add(a, b);
+      return add(a, b);
       break;
     case "-":
-      subtract(a, b);
+      return subtract(a, b);
       break;
     case "*":
-      multiply(a, b);
+      return multiply(a, b);
       break;
     case "/":
-      multiply(a, b);
+      if (b === 0) return null;
+      else return divide(a, b);
       break;
+    case "%":
+      return remainder(a, b);
+      break;
+    default:
+      return null;
   }
 }
