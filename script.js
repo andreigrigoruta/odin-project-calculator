@@ -64,17 +64,17 @@ function evaluate() {
   currentOperation = null;
 }
 
-function resetScreen() {
-  currentOpScreen.textContent = "";
-  shouldResetScreen = false;
-}
-
 function clear() {
   currentOpScreen.textContent = "0";
   lastOpScreen.textContent = "";
   firstOperand = "";
   secondOperand = "";
   currentOperation = null;
+}
+
+function resetScreen() {
+  currentOpScreen.textContent = "";
+  shouldResetScreen = false;
 }
 
 function deleteNumber() {
