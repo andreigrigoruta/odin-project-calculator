@@ -14,6 +14,7 @@ const currentOpScreen = document.getElementById("result");
 
 allClearBtn.addEventListener("click", clear);
 clearBtn.addEventListener("click", deleteNumber);
+equalsBtn.addEventListener("click", evaluate);
 
 numberBtns.forEach((button) =>
   button.addEventListener("click", () => appendNumber(button.textContent))
@@ -39,6 +40,7 @@ function setOperation(operator) {
   if (currentOperation !== null) {
     if (evaluate() === "zero") {
       lastOpScreen.textContent = "";
+      delayErr();
       return;
     }
   }
@@ -60,7 +62,7 @@ function evaluate() {
     firstOperand,
     secondOperand
   );
-  lastOpScreen.textContent = `${firstOperand} ${currentOperation} ${secondOperand}`;
+  lastOpScreen.textContent = `${firstOperand} ${currentOperation} ${secondOperand} =`;
   currentOperation = null;
 }
 
@@ -82,6 +84,13 @@ function deleteNumber() {
     .toString()
     .slice(0, -1);
 }
+
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+const delayErr = async () => {
+  await delay(1000);
+  clear();
+};
 
 function add(a, b) {
   return a + b;
@@ -115,7 +124,7 @@ function operate(operator, a, b) {
       break;
     case "x":
       return multiply(a, b);
-      break;
+    // break;
     case "/":
       if (b === 0) return null;
       else return divide(a, b);
