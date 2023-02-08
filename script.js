@@ -25,6 +25,7 @@ operatorBtns.forEach((button) =>
 );
 
 function appendNumber(number) {
+  console.log(shouldResetScreen);
   if (
     currentOpScreen.textContent === "0" ||
     shouldResetScreen ||
@@ -40,12 +41,14 @@ function setOperation(operator) {
   if (currentOperation !== null) {
     if (evaluate() === "zero") {
       lastOpScreen.textContent = "";
-      delayErr();
+      // delayErr();
       return;
     }
   }
+  console.log("1- " + firstOperand + " " + operator);
   firstOperand = currentOpScreen.textContent;
   currentOperation = operator;
+  console.log("2- " + firstOperand + " " + operator);
   lastOpScreen.textContent = `${firstOperand} ${operator} `;
   shouldResetScreen = true;
 }
@@ -54,13 +57,12 @@ function evaluate() {
   if (currentOperation === null || shouldResetScreen) return;
   if (currentOperation === "÷" && currentOpScreen.textContent === "0") {
     currentOpScreen.textContent = "ZERO DIV ER";
+    delayErr();
     return "zero";
   }
   secondOperand = currentOpScreen.textContent;
-  currentOpScreen.textContent = operate(
-    currentOperation,
-    firstOperand,
-    secondOperand
+  currentOpScreen.textContent = roundResult(
+    operate(currentOperation, firstOperand, secondOperand)
   );
   lastOpScreen.textContent = `${firstOperand} ${currentOperation} ${secondOperand} =`;
   currentOperation = null;
@@ -92,6 +94,10 @@ const delayErr = async () => {
   clear();
 };
 
+function roundResult(number) {
+  return Math.round(number * 1000) / 1000;
+}
+
 function add(a, b) {
   return a + b;
 }
@@ -122,10 +128,10 @@ function operate(operator, a, b) {
     case "-":
       return substract(a, b);
       break;
-    case "x":
+    case "×":
       return multiply(a, b);
-    // break;
-    case "/":
+      break;
+    case "÷":
       if (b === 0) return null;
       else return divide(a, b);
       break;
