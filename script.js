@@ -27,7 +27,6 @@ operatorBtns.forEach((button) =>
 );
 
 function appendNumber(number) {
-  console.log(shouldResetScreen);
   if (
     currentOpScreen.textContent === "0" ||
     shouldResetScreen ||
