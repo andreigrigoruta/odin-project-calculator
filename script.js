@@ -12,6 +12,7 @@ const decimalBtn = document.getElementById("decimal");
 const lastOpScreen = document.getElementById("user-input");
 const currentOpScreen = document.getElementById("result");
 
+window.addEventListener("keydown", handleKeyboardInput);
 allClearBtn.addEventListener("click", clear);
 clearBtn.addEventListener("click", deleteNumber);
 equalsBtn.addEventListener("click", evaluate);
@@ -42,14 +43,11 @@ function setOperation(operator) {
   if (currentOperation !== null) {
     if (evaluate() === "zero") {
       lastOpScreen.textContent = "";
-      // delayErr();
       return;
     }
   }
-  console.log("1- " + firstOperand + " " + operator);
   firstOperand = currentOpScreen.textContent;
   currentOperation = operator;
-  console.log("2- " + firstOperand + " " + operator);
   lastOpScreen.textContent = `${firstOperand} ${operator} `;
   shouldResetScreen = true;
 }
@@ -93,6 +91,23 @@ function deleteNumber() {
   currentOpScreen.textContent = currentOpScreen.textContent
     .toString()
     .slice(0, -1);
+}
+
+function handleKeyboardInput(e) {
+  if (e.key >= 0 && e.key <= 9) appendNumber(e.key);
+  if (e.key === ".") appendPoint();
+  if (e.key === "=" || e.key === "Enter") evaluate();
+  if (e.key === "Backspace") deleteNumber();
+  if (e.key === "Escape") clear();
+  if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/")
+    setOperation(convertOperator(e.key));
+}
+
+function convertOperator(keyboardOperator) {
+  if (keyboardOperator === "/") return "÷";
+  if (keyboardOperator === "*") return "×";
+  if (keyboardOperator === "-") return "-";
+  if (keyboardOperator === "+") return "+";
 }
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
