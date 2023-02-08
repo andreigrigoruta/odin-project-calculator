@@ -15,6 +15,7 @@ const currentOpScreen = document.getElementById("result");
 allClearBtn.addEventListener("click", clear);
 clearBtn.addEventListener("click", deleteNumber);
 equalsBtn.addEventListener("click", evaluate);
+decimalBtn.addEventListener("click", appendPoint);
 
 numberBtns.forEach((button) =>
   button.addEventListener("click", () => appendNumber(button.textContent))
@@ -56,7 +57,7 @@ function setOperation(operator) {
 function evaluate() {
   if (currentOperation === null || shouldResetScreen) return;
   if (currentOperation === "÷" && currentOpScreen.textContent === "0") {
-    currentOpScreen.textContent = "ZERO DIV ER";
+    currentOpScreen.textContent = "Zero division err";
     delayErr();
     return "zero";
   }
@@ -66,6 +67,13 @@ function evaluate() {
   );
   lastOpScreen.textContent = `${firstOperand} ${currentOperation} ${secondOperand} =`;
   currentOperation = null;
+}
+
+function appendPoint() {
+  if (shouldResetScreen) resetScreen();
+  if (currentOpScreen.textContent === "") currentOpScreen.textContent = "0";
+  if (currentOpScreen.textContent.includes(".")) return;
+  currentOpScreen.textContent += ".";
 }
 
 function clear() {
@@ -95,7 +103,7 @@ const delayErr = async () => {
 };
 
 function roundResult(number) {
-  return Math.round(number * 1000) / 1000;
+  return Math.round(number * 1000000) / 1000000;
 }
 
 function add(a, b) {

@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  background-color: rgb(116, 116, 116);
 }
 *,
 *::before,
@@ -14,15 +15,6 @@ body {
   line-height: 1.5;
 }
 
-#allclear:hover,
-#clear:hover {
-  background-color: red;
-}
-
-#equals:hover {
-  background-color: greenyellow;
-}
-
 .buttons-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -34,7 +26,7 @@ body {
   border-radius: 15px;
   border: 2px black solid;
   padding: 20px;
-  background-color: aqua;
+  background-color: rgb(129, 95, 160);
 }
 
 .main {
@@ -52,6 +44,8 @@ body {
   border: 2px black solid;
   background-color: white;
   margin-bottom: 20px;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 button.equals {
@@ -59,15 +53,36 @@ button.equals {
 }
 
 .buttons-grid button {
-  padding: 1rem 0;
+  padding: 1.325rem 0;
   font-size: 1.325rem;
   border-radius: 5px;
 }
 
 .buttons-grid button:hover {
-  background-color: lightgray;
+  background-color: rgb(145, 145, 145);
 }
 
+.buttons-grid button:active {
+  background-color: rgb(182, 182, 182);
+}
+
+#allclear:hover,
+#clear:hover {
+  background-color: red;
+}
+
+#allclear:active,
+#clear:active {
+  background-color: lightcoral;
+}
+
+#equals:hover {
+  background-color: greenyellow;
+}
+
+#equals:active {
+  background-color: rgb(216, 255, 158);
+}
 .user-input {
   min-height: 30px;
   font-size: 20px;
